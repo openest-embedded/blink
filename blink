@@ -1,0 +1,21 @@
+#!/bin/sh
+
+LED_BRIGHTNESS_PATH=/sys/class/leds/omega2p:amber:system/brightness
+LED_ON=255
+LED_OFF=0
+
+if [ ! -f $LED_BRIGHTNESS_PATH ]; then
+	echo "Error: led brightness does not exist ($LED_BRIGHTNESS_PATH)" 1>&2;
+	exit 1
+fi
+
+
+echo "blinking omega2+ amber led, stop with ctrl+c"
+
+while true; do
+	echo $LED_ON >$LED_BRIGHTNESS_PATH
+	sleep 1
+	echo $LED_OFF >$LED_BRIGHTNESS_PATH
+	sleep 1
+done
+
